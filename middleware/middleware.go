@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 
+	"pokeapi_module/config"
+
 	"github.com/gin-gonic/gin"
-	"gitlab.com/kitalabs/go-2gaijin/config"
-	"gitlab.com/kitalabs/go-2gaijin/pkg/websocket"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -21,8 +21,6 @@ const dbName = "gopokeapi"
 
 // Database instance
 var DB *mongo.Database
-
-var Pool *websocket.Pool
 
 var IsProduction = false
 
@@ -49,7 +47,7 @@ func init() {
 
 func HandlePreflight(c *gin.Context) {
 	c.Writer.Header().Set("Access-Control-Allow-Origin", config.CORS)
-	c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET")
+	c.Writer.Header().Set("Access-Control-Allow-Methods", "PATCH, POST, OPTIONS, GET")
 	c.Writer.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Authorization")
 	return
 }

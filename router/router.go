@@ -1,8 +1,9 @@
 package router
 
 import (
+	"pokeapi_module/middleware"
+
 	"github.com/gin-gonic/gin"
-	"gitlab.com/kitalabs/go-2gaijin/middleware"
 )
 
 // Router is exported and used in main.go
@@ -12,19 +13,18 @@ func Router() *gin.Engine {
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
 
-	r.GET("/", middleware.GetHome)
 	r.GET("/pokemon/:id", middleware.GetPokemonDetail)
 	r.GET("/pokemons", middleware.GetAllPokemons)
-	r.GET("/search", middleware.GetSearch)
 	r.POST("/catch_pokemon", middleware.CatchPokemon)
 	r.PATCH("/rename_my_pokemon", middleware.RenameMyPokemon)
-	r.GET("/my_profile", middleware.GetMyProfile)
+	r.POST("/release_pokemon", middleware.ReleasePokemon)
 
 	r.POST("/sign_in", middleware.LoginHandler)
 	r.POST("/sign_up", middleware.RegisterHandler)
-	r.POST("/sign_out", middleware.LogoutHandler)
+	r.DELETE("/sign_out", middleware.LogoutHandler)
 	r.POST("/refresh_token", middleware.RefreshToken)
-	r.POST("/update_profile", middleware.UpdateProfile)
+	r.PUT("/update_profile", middleware.UpdateProfile)
+	r.GET("/my_profile", middleware.ProfileHandler)
 
 	// Preflight Response
 	r.OPTIONS("/", middleware.HandlePreflight)

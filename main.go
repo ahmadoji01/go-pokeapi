@@ -4,9 +4,10 @@ import (
 	"log"
 	"net/http"
 
+	"pokeapi_module/config"
+	"pokeapi_module/router"
+
 	"github.com/gin-gonic/contrib/cors"
-	"gitlab.com/kitalabs/go-2gaijin/config"
-	"gitlab.com/kitalabs/go-2gaijin/router"
 )
 
 func redirectTLS(w http.ResponseWriter, r *http.Request) {
